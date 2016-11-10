@@ -1,1 +1,173 @@
-apps
+<html ng-app="Apps" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta charset="utf-8">
+
+    <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../html/stylesheets/photon.css" rel="stylesheet">
+    <link href="../../html/stylesheets/common.css" rel="stylesheet">
+
+    <script src="../../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../../node_modules/angular/angular.js"></script>
+
+    <script src="./js/apps.js"></script>
+    <!--<script src="./js/services/i18n.js"></script>
+    <script src="./js/services/settings.js"></script>
+    <script src="./js/services/user.js"></script>-->
+    <script src="./js/controllers/main.js"></script>
+
+<style>
+.list-group li:not(:last-of-type) {
+   border-bottom:1px;
+}
+</style>
+
+  </head>
+  <body ng-controller="MainCtrl" class="ng-scope">
+
+<!--
+    <ng-include class="modal" id="modalCreateAccount" tabindex="-1" role="dialog" data-backdrop="false"
+                src="'views/modals/create_address.html'">
+    </ng-include>
+-->
+
+    <div class="window">
+      <div class="window-content">
+        <div class="pane-group">
+          <div class="pane container">
+            <!-- ngInclude: --><ng-include src="'views/apps.html'" class="ng-scope">
+
+  <div class="col-md-4 ng-scope">
+
+<ul class="list-group">
+
+  <li class="list-group-header">
+    <h5>Installed</h5>
+  </li>
+  <li class="list-group-item">
+    <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
+    <div>
+      <button class="btn btn-default pull-right">
+        <span class="icon icon-home"></span>
+      </button>
+
+      <strong>List item title</strong>
+      <p>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. </p>
+<!--      <button type="button" class="btn btn-mini btn-default">
+        <span class="icon icon-window icon-text"></span>
+        Open
+      </button>
+      <button type="button" class="btn btn-mini btn-default">
+        <span class="icon icon-info-circled icon-text"></span>
+        Details
+      </button>
+      <button type="button" class="btn btn-mini btn-default">
+        <span class="icon icon-cancel-circled icon-text"></span>
+        Remove
+      </button>-->
+    </div>
+  </li>
+  <li class="list-group-item">
+    <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar.jpg" width="32" height="32">
+    <div class="media-body">
+      <button class="btn btn-default pull-right">
+        <span class="icon icon-home"></span>
+      </button>
+      <strong>List item title</strong>
+      <p>Lorem ipsum dolor sit amet.</p>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar.jpg" width="32" height="32">
+    <div class="media-body">
+      <strong>List item title</strong>
+      <p>Lorem ipsum dolor sit amet.</p>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar.jpg" width="32" height="32">
+    <div class="media-body">
+      <strong>List item title</strong>
+      <p>Lorem ipsum dolor sit amet.</p>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar.jpg" width="32" height="32">
+    <div class="media-body">
+      <strong>List item title</strong>
+      <p>Lorem ipsum dolor sit amet.</p>
+    </div>
+  </li>
+</ul>
+
+  </div>
+  <div class="col-md-8 ng-scope">
+
+
+    <ul class="list-group">
+      <li class="list-group-header">
+        <input class="form-control" placeholder="Search apps" type="text">
+      </li>
+      <li class="list-group-header">
+        <h5>Results for XYZ...</h5>
+        <a href="">Clear results</a>
+      </li>
+      <li class="list-group-item">
+        <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar.jpg" width="32" height="32">
+        <div>
+          <div class="btn-group pull-right">
+            <button class="btn btn-default">
+              <span class="icon icon-home"></span>
+            </button>
+</div>
+          <strong>List item title</strong>
+          <p>Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.</p>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar.jpg" width="32" height="32">
+        <div class="media-body">
+          <strong>List item title</strong>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+      </li>
+
+      <li class="list-group-header">
+        <h5>Featured</h5>
+      </li>
+      <li class="list-group-item">
+        <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
+        <div class="media-body">
+          <strong>List item title</strong>
+          <p>Lorem ipsum dolor sit amet.</p>
+          <!--<button type="button" class="btn btn-mini btn-default">
+            <span class="icon icon-download icon-text"></span>
+            Install
+          </button>
+          <button type="button" class="btn btn-mini btn-default">
+            <span class="icon icon-info-circled icon-text"></span>
+            Details
+          </button>-->
+        </div>
+      </li>
+      <li class="list-group-item">
+        <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar.jpg" width="32" height="32">
+        <div class="media-body">
+          <strong>List item title</strong>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+      </li>
+    </ul>
+
+
+
+
+  </div>
+</ng-include>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+</body></html>
