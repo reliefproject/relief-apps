@@ -1,0 +1,42 @@
+<form class="modal-dialog" role="document" novalidate>
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h5 class="modal-title">{{ appToInstall.name }}</h5>
+    </div>
+
+    <div class="modal-body">
+      <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
+      <p>{{ appToInstall.description }}</p>
+      <table class="table table-condensed">
+        <tr>
+          <td>Publisher</td><td>{{ appToInstall.accountRS }}</td>
+        </tr><tr>
+          <td>Transaction</td><td>{{ appToInstall.transaction }}</td>
+        </tr><tr>
+          <td>Date published</td><td>{{ appToInstall.transactionTimestamp }}</td>
+        </tr>
+      </table>
+      <div class="alert alert-warning" role="alert">Warning: Apps have access to your saved private keys.</div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="appToInstall.responsibilityTaken"> I take responsibility for my own actions
+        </label>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">
+        Close
+      </button>
+      <button type="button" class="btn btn-positive"
+              ng-disabled="!appToInstall.responsibilityTaken"
+              ng-click="installApp()">
+        Install
+      </button>
+    </div>
+
+  </div><!-- /.modal-content -->
+
+</form><!-- /.modal-dialog -->

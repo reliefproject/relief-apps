@@ -10,25 +10,33 @@
     <script src="../../node_modules/angular/angular.js"></script>
 
     <script src="./js/apps.js"></script>
-    <!--<script src="./js/services/i18n.js"></script>
+    <script src="./js/services/i18n.js"></script>
     <script src="./js/services/settings.js"></script>
-    <script src="./js/services/user.js"></script>-->
+    <script src="./js/services/packages.js"></script>
     <script src="./js/controllers/main.js"></script>
 
 <style>
 .list-group li:not(:last-of-type) {
    border-bottom:1px;
 }
+a, .list-group-item, .list-group li:not(:first-of-type) * {
+  cursor: pointer;
+}
+.list-group-item:hover {
+  background-color:#ddd;
+}
 </style>
 
   </head>
   <body ng-controller="MainCtrl" class="ng-scope">
 
-<!--
-    <ng-include class="modal" id="modalCreateAccount" tabindex="-1" role="dialog" data-backdrop="false"
-                src="'views/modals/create_address.html'">
+
+    <ng-include class="modal" id="modalDetails" tabindex="-1" role="dialog" data-backdrop="false"
+                src="'views/modals/details.html'">
     </ng-include>
--->
+    <ng-include class="modal" id="modalDetailsInstalled" tabindex="-1" role="dialog" data-backdrop="false"
+                src="'views/modals/details_installed.html'">
+    </ng-include>
 
     <div class="window">
       <div class="window-content">
