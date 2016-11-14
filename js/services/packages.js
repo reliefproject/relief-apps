@@ -57,6 +57,19 @@
             };
             for (let i in result.data.data) {
               let data = result.data.data[i];
+              let manifest = data.data;
+              if (!manifest) {
+                continue;
+              }
+              if (!data.isText) {
+                manifest = Buffer.from(manifest, 'hex').toString();
+              }
+              try {
+                manifest = JSON.parse(manifest);
+              } catch (e) {
+                continue;
+              }
+              Object.assign(data, manifest);
               if (data.transaction === aliasData) {
                 returnVal.package = data;
                 continue;

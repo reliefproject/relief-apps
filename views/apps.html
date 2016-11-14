@@ -47,7 +47,7 @@
         ng-click="setAppToInstall(searchResults.package)">
       <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
       <div>
-        <strong>{{ searchResults.package.name }}</strong>
+        <strong>{{ searchResults.package.name }}</strong> {{ searchResults.package.version }}
         <p>{{ searchResults.package.description }}</p>
       </div>
     </li>
@@ -64,7 +64,7 @@
         ng-click="setAppToInstall(app)">
       <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
       <div>
-        <strong>{{ app.name }}</strong>
+        <strong>{{ app.name }}</strong> {{ app.version }}
         <p>{{ app.description }}</p>
       </div>
     </li>
@@ -78,7 +78,7 @@
           ng-click="setAppToInstall(app)">
         <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
         <div>
-          <strong>{{ app.name }}</strong>
+          <strong>{{ app.name }}</strong> {{ app.version }}
           <p>{{ app.description }}</p>
         </div>
       </li>
