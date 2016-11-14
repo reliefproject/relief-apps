@@ -27,15 +27,40 @@
       <input class="form-control" type="text" placeholder="Search apps"
              ng-model="forms.search" />
     </form>
+    <a href class="pull-right"
+       ng-click="clearSearchResults()"
+       ng-show="searchResults.package.name || searchResults.similarPackages.length > 0">
+        Clear results
+    </a>
   </ul>
-    <ul class="list-group">
+
+  <ul class="list-group">
     <li class="list-group-header"
-        ng-show="searchResults.length > 0">
-      <h5>Results for XYZ...</h5>
-      <a href ng-click="clearSearchResults()">Clear results</a>
+        ng-show="!searchResults.package.name && searchResults.query">
+      <h5>No results for &quot;{{ searchResults.query }}&quot;</h5>
+    </li>
+    <li class="list-group-header" ng-show="searchResults.package.name">
+      <h5>&quot;{{ searchResults.package.name }}&quot;</h5>
     </li>
     <li class="list-group-item" data-toggle="modal" data-target="#modalDetails"
-        ng-repeat="app in searchResults"
+        ng-show="searchResults.package.name"
+        ng-click="setAppToInstall(searchResults.package)">
+      <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
+      <div>
+        <strong>{{ searchResults.package.name }}</strong>
+        <p>{{ searchResults.package.description }}</p>
+      </div>
+    </li>
+  </ul>
+
+    <ul class="list-group">
+    <li class="list-group-header"
+        ng-show="searchResults.similarPackages.length > 0">
+      <h5>Similar packages ({{ searchResults.similarPackages.length }})</h5>
+    </li>
+
+    <li class="list-group-item" data-toggle="modal" data-target="#modalDetails"
+        ng-repeat="app in searchResults.similarPackages"
         ng-click="setAppToInstall(app)">
       <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
       <div>
