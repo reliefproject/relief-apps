@@ -5,11 +5,10 @@
     $scope, i18n, Settings, Packages
   ) {
 
-    //$scope.searchForm = '';
     $scope.forms = {
       search: '',
     };
-    $scope.installedApps = [];
+    $scope.installedPlugins = {};
     $scope.featuredApps = [];
     $scope.searchResults = [];
     $scope.appToEdit = {
@@ -17,14 +16,19 @@
     };
     $scope.appToInstall = {
       responsibilityTaken: false,
+      error: '',
     };
 
 
     Settings.loadSettings()
     .then(function() {
-      i18n.loadStrings(Settings.settings.language)
+      Relief.log.info(Settings.userData.installedPlugins)
+      for (let k in Settings.userData.installedPlugins) {
+        const pluginName = Settings.userData.installedPlugins[k];
+        $scope.installedPlugins[pluginName] = Relief.plugin.loadPlugin(pluginName);
+      }
+      return i18n.loadStrings(Settings.settings.language)
     })
-    //.then(Packages.getInstalled)
     .then(Packages.getFeatured)
     .then(function(data) {
       $scope.featuredApps = data;
@@ -61,19 +65,21 @@
 
     $scope.setAppToInstall = function(app) {
       $scope.appToInstall = app;
-      // TODO
-      // $scope.appToInstall.showInMenu = ;
     };
 
 
     $scope.installApp = function() {
       Relief.plugin.install($scope.appToInstall.name)
       .then(function() {
-        alert('well ok hmmmm')
-      },
-        Relief.log.error
-      );
-      angular.element('#modalDetails').modal('hide');
+        return Settings.addInstalledApp($scope.appToInstall)
+        .then(function() {
+          angular.element('#modalDetails').modal('hide');
+        });
+      }, function(err) {
+        Relief.log.error(err);
+        $scope.appToInstall.error = err.message;
+        $scope.$apply();
+      });
     };
 
 

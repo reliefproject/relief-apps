@@ -24,6 +24,7 @@
           <input type="checkbox" ng-model="appToInstall.responsibilityTaken"> I take responsibility for my own actions
         </label>
       </div>
+      <div class="alert alert-danger" role="alert" ng-show="appToInstall.error">Error: {{ appToInstall.error }}</div>
     </div>
 
     <div class="modal-footer">
