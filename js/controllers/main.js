@@ -67,9 +67,7 @@
 
 
     $scope.installApp = function() {
-      alert('install')
-      const pluginDir = __dirname + '/../../../.';
-      Relief.lib.nxtpm.Package.install($scope.appToInstall.name, pluginDir)
+      Relief.plugin.install($scope.appToInstall.name)
       .then(function() {
         alert('well ok hmmmm')
       },
