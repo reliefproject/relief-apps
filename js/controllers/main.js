@@ -36,8 +36,8 @@
     );
 
 
-    $scope.launchApp = function() {
-      alert('launch')
+    $scope.launchApp = function(plugin) {
+      Relief.emit('webview.open', plugin);
     };
 
 
