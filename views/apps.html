@@ -38,19 +38,19 @@
 
   <ul class="list-group">
     <li class="list-group-header"
-        ng-show="!searchResults.package.name && searchResults.query">
+        ng-show="!searchResults.package.manifest.name && searchResults.query">
       <h5>No results for &quot;{{ searchResults.query }}&quot;</h5>
     </li>
-    <li class="list-group-header" ng-show="searchResults.package.name">
-      <h5>&quot;{{ searchResults.package.name }}&quot;</h5>
+    <li class="list-group-header" ng-show="searchResults.package.manifest.name">
+      <h5>&quot;{{ searchResults.package.manifest.name }}&quot;</h5>
     </li>
     <li class="list-group-item" data-toggle="modal" data-target="#modalDetails"
-        ng-show="searchResults.package.name"
+        ng-show="searchResults.package.manifest.name"
         ng-click="setAppToInstall(searchResults.package)">
       <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
       <div>
-        <strong>{{ searchResults.package.name }}</strong> {{ searchResults.package.version }}
-        <p>{{ searchResults.package.description }}</p>
+        <strong>{{ searchResults.package.manifest.name }}</strong> {{ searchResults.package.manifest.version }}
+        <p>{{ searchResults.package.manifest.description }}</p>
       </div>
     </li>
   </ul>
@@ -66,8 +66,8 @@
         ng-click="setAppToInstall(app)">
       <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
       <div>
-        <strong>{{ app.name }}</strong> {{ app.version }}
-        <p>{{ app.description }}</p>
+        <strong>{{ app.manifest.name }}</strong> {{ app.manifest.version }}
+        <p>{{ app.manifest.description }}</p>
       </div>
     </li>
   </ul>
@@ -80,8 +80,8 @@
           ng-click="setAppToInstall(app)">
         <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
         <div>
-          <strong>{{ app.name }}</strong> {{ app.version }}
-          <p>{{ app.description }}</p>
+          <strong>{{ app.manifest.name }}</strong> {{ app.manifest.version }}
+          <p>{{ app.manifest.description }}</p>
         </div>
       </li>
     </ul>
