@@ -10,6 +10,7 @@
       loadSettings: function() {
         return Relief.db.user.getDoc()
         .then(function(data) {
+          Relief.log.info(data.plugins)
           for (let k in data.plugins) {
             const settings = data.plugins[k];
             const manifest = Relief.plugin.loadPlugin(k);
@@ -31,7 +32,7 @@
 
       addPlugin: function(plugin) {
         let plugins = this.getPlugins();
-        plugins[plugin.name] = {
+        plugins[plugin.manifest.name] = {
           showInMenu: true,
         };
         service.pluginMap.set(plugin, plugins[plugin.name]);
