@@ -31,9 +31,9 @@
       $scope.featuredApps = data;
       $scope.$apply();
     },
-      // Error handler
-      Relief.log.error
-    );
+    function(err) {
+      Relief.log.error(err.stack);
+    });
 
 
     $scope.launchApp = function(plugin) {
@@ -88,7 +88,7 @@
 
 
     $scope.installApp = function() {
-      Relief.plugin.install($scope.appToInstall.name)
+      Relief.plugin.install($scope.appToInstall.manifest.name)
       .then(function() {
         return User.addPlugin($scope.appToInstall);
       })
@@ -111,9 +111,9 @@
         $scope.searchResults = data;
         $scope.$apply();
       },
-        // Error handler
-        Relief.log.error
-      );
+      function(err) {
+        Relief.log.error(err.stack);
+      });
     };
 
 
