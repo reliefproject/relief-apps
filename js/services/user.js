@@ -33,9 +33,10 @@
       addPlugin: function(plugin) {
         let plugins = this.getPlugins();
         plugins[plugin.manifest.name] = {
+          enabled: true,
           showInMenu: true,
         };
-        service.pluginMap.set(plugin, plugins[plugin.name]);
+        service.pluginMap.set(plugin.manifest, plugins[plugin.manifest.name]);
         return Relief.db.user.update({
           plugins: plugins,
         });

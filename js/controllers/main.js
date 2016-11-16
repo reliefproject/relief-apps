@@ -98,7 +98,7 @@
         angular.element('#modalDetails').modal('hide');
         Relief.emit('updateAppMenu');
       }, function(err) {
-        Relief.log.error(err);
+        Relief.log.error(err.stack);
         $scope.appToInstall.error = err.message;
         $scope.$apply();
       });
