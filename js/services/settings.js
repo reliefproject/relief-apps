@@ -5,6 +5,7 @@
 
       settings: {},
       userData: {},
+      pluginMap: new Map(),
 
 
       loadSettings: function() {
@@ -19,25 +20,30 @@
 
 
       addInstalledApp: function(app) {
-        service.userData.installedPlugins[app.name] = {
+        let plugins = angular.copy(service.userData.installedPlugins);
+        plugins[app.name] = {
           showInMenu: true,
-          settings: {},
         };
         return Relief.db.user.update({
-          installedPlugins: service.userData.installedPlugins,
+          installedPlugins: plugins,
         });
       },
 
 
-      updateInstalledApp: function(app) {
-
+      updateInstalledApp: function(name, settings) {
+        let plugins = angular.copy(service.userData.installedPlugins);
+        plugins[name] = settings;
+        return Relief.db.user.update({
+          installedPlugins: plugins,
+        });
       },
 
 
       removeInstalledApp: function(name) {
-        delete service.userData.installedPlugins[name];
+        let plugins = angular.copy(service.userData.installedPlugins);
+        delete plugins[name];
         return Relief.db.user.update({
-          installedPlugins: service.userData.installedPlugins,
+          installedPlugins: plugins,
         });
       },
 

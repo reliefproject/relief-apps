@@ -3,24 +3,20 @@
 
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <h5 class="modal-title">App Title</h5>
+      <h5 class="modal-title">{{ appToEdit.manifest.name }}</h5>
     </div>
 
     <div class="modal-body">
       <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
-      <p>Description Lorem Ip sum solor dir apmet  Lorem Ip sum solor dir apmet  Lorem Ip sum solor dir apmet  Lorem Ip sum solor dir apmet  Lorem Ip sum solor dir apmet  Lorem Ip sum solor dir apmet  Lorem Ip sum solor dir apmet </p>
+      <p>{{ appToEdit.manifest.description }}</p>
       <table class="table table-condensed">
         <tr>
-          <td>Publisher</td><td>NXT-ASDF-ASDF-ASDF-ASDFF</td>
-        </tr><tr>
-          <td>Transaction</td><td>792834792837234</td>
-        </tr><tr>
-          <td>Date published</td><td>Oct 45 1922</td>
+          <td>Version</td><td>{{ appToEdit.manifest.version }}</td>
         </tr>
       </table>
       <div class="checkbox">
         <label>
-          <input type="checkbox" ng-model="appToEdit.showInMenu"> Show in "My Apps" menu
+          <input type="checkbox" ng-model="appToEdit.settings.showInMenu"> Show in "My Apps" menu
         </label>
       </div>
     </div>
