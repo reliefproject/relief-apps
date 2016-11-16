@@ -58,6 +58,7 @@
       )
       .then(function() {
         angular.element('#modalDetailsInstalled').modal('hide');
+        Relief.emit('updateAppMenu');
       },
       function(err) {
         // TODO
@@ -73,6 +74,7 @@
         $scope.installedApps = [...User.pluginMap.keys()];
         $scope.$apply();
         angular.element('#modalDetailsInstalled').modal('hide');
+        Relief.emit('updateAppMenu');
       },
       function(err) {
         // TODO
@@ -94,6 +96,7 @@
         $scope.installedApps = [...User.pluginMap.keys()];
         $scope.$apply();
         angular.element('#modalDetails').modal('hide');
+        Relief.emit('updateAppMenu');
       }, function(err) {
         Relief.log.error(err);
         $scope.appToInstall.error = err.message;
