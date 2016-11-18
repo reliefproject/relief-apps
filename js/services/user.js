@@ -13,7 +13,7 @@
           Relief.log.info(data.plugins)
           for (let k in data.plugins) {
             const settings = data.plugins[k];
-            const manifest = Relief.plugin.loadPlugin(k);
+            const manifest = Relief.plugin.getManifest(k);
             service.pluginMap.set(manifest, settings);
           }
         });

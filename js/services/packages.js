@@ -9,12 +9,12 @@
 
 
       getFeatured: function() {
-        const featuredApps = ["test5", "test6"];
+        const featuredApps = ['test5', 'test6'];
         let promises = [];
         for (let i in featuredApps) {
           const app = featuredApps[i];
           promises.push(
-            Relief.plugin.getPackageInfo(app)
+            Relief.plugin.info(app)
           );
         }
         return Promise.all(promises);
@@ -23,18 +23,16 @@
 
       getSearchResults: function(query) {
         let aliasData;
-        return Relief.nxt.request({
-          requestType: 'getAlias',
-          aliasName: query
+        return Relief.nxt.request('getAlias', {
+          aliasName: query,
         })
         .then(function(result) {
           if (result.data.aliasURI) {
             aliasData = result.data.aliasURI;
           }
-          return Relief.nxt.request({
-            requestType: 'searchTaggedData',
+          return Relief.nxt.request('searchTaggedData', {
             query: query,
-            // channel: '',
+            // Channel: '',
             includeData: true,
           });
         })
