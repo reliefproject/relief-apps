@@ -5,8 +5,8 @@
 
       data: {},
 
-      loadSettings: function() {
-        return Relief.db.app.getDoc().then(function(data) {
+      loadSettings: () => {
+        return Relief.db.app.getDoc().then(data => {
           service.data = data;
         });
       },

@@ -7,20 +7,19 @@
       pluginMap: new Map(),
 
 
-      loadSettings: function() {
+      loadSettings: () => {
         return Relief.db.user.getDoc()
-        .then(function(data) {
-          Relief.log.info(data.plugins)
+        .then(data => {
           for (let k in data.plugins) {
-            const settings = data.plugins[k];
+            const plugin = data.plugins[k];
             const manifest = Relief.plugin.getManifest(k);
-            service.pluginMap.set(manifest, settings);
+            service.pluginMap.set(manifest, plugin);
           }
         });
       },
 
 
-      getPlugins: function() {
+      getPlugins: () => {
         let plugins = {};
         for (const entry of service.pluginMap.entries()) {
           const name = entry[0].name;
@@ -30,8 +29,8 @@
       },
 
 
-      addPlugin: function(plugin) {
-        let plugins = this.getPlugins();
+      addPlugin: plugin => {
+        let plugins = service.getPlugins();
         plugins[plugin.manifest.name] = {
           enabled: true,
           showInMenu: true,
@@ -43,8 +42,8 @@
       },
 
 
-      updatePlugin: function(manifest, settings) {
-        let plugins = this.getPlugins();
+      updatePlugin: (manifest, settings) => {
+        let plugins = service.getPlugins();
         plugins[manifest.name] = settings;
         service.pluginMap.set(manifest, settings);
         return Relief.db.user.update({
@@ -53,8 +52,8 @@
       },
 
 
-      removePlugin: function(manifest) {
-        let plugins = this.getPlugins();
+      removePlugin: manifest => {
+        let plugins = service.getPlugins();
         delete plugins[manifest.name];
         service.pluginMap.delete(manifest);
         return Relief.db.user.update({

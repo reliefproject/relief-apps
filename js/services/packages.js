@@ -8,7 +8,7 @@
       searchResults: {},
 
 
-      getFeatured: function() {
+      getFeatured: () => {
         const featuredApps = ['test5', 'test6'];
         let promises = [];
         for (let i in featuredApps) {
@@ -21,12 +21,12 @@
       },
 
 
-      getSearchResults: function(query) {
+      getSearchResults: query => {
         let aliasData;
         return Relief.nxt.request('getAlias', {
           aliasName: query,
         })
-        .then(function(result) {
+        .then(result => {
           if (result.data.aliasURI) {
             aliasData = result.data.aliasURI;
           }
@@ -36,51 +36,43 @@
             includeData: true,
           });
         })
-        .then(function(result) {
-          return new Promise(function(resolve, reject) {
-            if (!result.data.data) {
-              return reject(result.data.err);
+        .then(result => {
+          const packages = result.data.data;
+          let returnVal = {
+            query: query,
+            package: {},
+            similarPackages: [],
+          };
+          for (let transaction of packages) {
+            if (!transaction.data) {
+              continue;
             }
-            const packages = result.data.data;
-            let returnVal = {
-              query: query,
-              package: {},
-              similarPackages: [],
-            };
-            for (let i in packages) {
-              let transaction = packages[i];
-              let manifest = transaction.data;
-              if (!manifest) {
-                continue;
-              }
-              if (!transaction.isText) {
-                manifest = Buffer.from(manifest, 'hex').toString();
-              }
-              try {
-                manifest = JSON.parse(manifest);
-              } catch (e) {
-                continue;
-              }
-              if (transaction.transaction === aliasData) {
-                returnVal.package = {
-                  transaction: transaction,
-                  manifest: manifest,
-                };
-                continue;
-              }
-              returnVal.similarPackages.push({
+            let manifest = transaction.isText
+              ? transaction.data
+              : Buffer.from(transaction.data, 'hex').toString();
+            manifest = JSON.parse(manifest);
+
+            if (transaction.transaction === aliasData) {
+              returnVal.package = {
                 transaction: transaction,
                 manifest: manifest,
-              });
+              };
+              continue;
             }
-            resolve(returnVal);
-          });
+            returnVal.similarPackages.push({
+              transaction: transaction,
+              manifest: manifest,
+            });
+          }
+          return returnVal;
         });
       },
 
 
     };
+
     return service;
+
   });
 
 })();
