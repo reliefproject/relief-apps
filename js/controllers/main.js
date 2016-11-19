@@ -5,6 +5,7 @@
     $scope, i18n, Settings, Packages, User
   ) {
 
+    $scope.strings = {};
     $scope.forms = {
       search: '',
     };
@@ -22,26 +23,27 @@
 
     Settings.loadSettings()
     .then(User.loadSettings)
-    .then(function() {
+    .then(() => {
       $scope.installedApps = [...User.pluginMap.keys()];
-      return i18n.loadStrings(Settings.data.language)
+      i18n.load(Settings.data.language, ['common', 'apps']);
+      $scope.strings = i18n.strings;
+      $scope.$apply();
+      return Packages.getFeatured();
     })
-    .then(Packages.getFeatured)
-    .then(function(data) {
+    .then(data => {
       $scope.featuredApps = data;
       $scope.$apply();
-    },
-    function(err) {
-      Relief.log.error(err.stack);
+    }, err => {
+      Relief.log.error(err.stack || err);
     });
 
 
-    $scope.launchApp = function(plugin) {
+    $scope.launchApp = plugin => {
       Relief.emit('webview.open', plugin);
     };
 
 
-    $scope.setAppToEdit = function($event, app) {
+    $scope.setAppToEdit = ($event, app) => {
       $event.stopPropagation();
       $scope.appToEdit = {
         manifest: app,
@@ -51,75 +53,69 @@
     };
 
 
-    $scope.updateEditedApp = function() {
+    $scope.updateEditedApp = () => {
       User.updatePlugin(
         $scope.appToEdit.manifest,
         $scope.appToEdit.settings
       )
-      .then(function() {
+      .then(() => {
         angular.element('#modalDetailsInstalled').modal('hide');
         Relief.emit('updateAppMenu');
-      },
-      function(err) {
-        // TODO
+      }, err => {
+        Relief.log.error(err.stack || err);
       });
     };
 
 
-    $scope.uninstallApp = function() {
+    $scope.uninstallApp = () => {
       User.removePlugin(
         $scope.appToEdit.manifest
       )
-      .then(function() {
+      .then(() => {
         $scope.installedApps = [...User.pluginMap.keys()];
         $scope.$apply();
         angular.element('#modalDetailsInstalled').modal('hide');
         Relief.emit('updateAppMenu');
-      },
-      function(err) {
-        // TODO
+      }, err => {
+        Relief.log.error(err.stack || err);
       });
     };
 
 
-    $scope.setAppToInstall = function(app) {
-      $scope.appToInstall = app;
-    };
+    $scope.setAppToInstall = app => $scope.appToInstall = app;
 
 
-    $scope.installApp = function() {
+    $scope.installApp = () => {
       Relief.plugin.install($scope.appToInstall.manifest.name)
-      .then(function() {
+      .then(() => {
         return User.addPlugin($scope.appToInstall);
       })
-      .then(function() {
+      .then(() => {
         $scope.installedApps = [...User.pluginMap.keys()];
         $scope.$apply();
         angular.element('#modalDetails').modal('hide');
         Relief.emit('updateAppMenu');
-      }, function(err) {
-        Relief.log.error(err.stack);
+      }, err => {
+        Relief.log.error(err.stack || err);
         $scope.appToInstall.error = err.message;
         $scope.$apply();
       });
     };
 
 
-    $scope.submitSearchForm = function() {
+    $scope.submitSearchForm = () => {
       Packages.getSearchResults($scope.forms.search)
-      .then(function(data) {
+      .then(data => {
         $scope.searchResults = data;
         $scope.$apply();
-      },
-      function(err) {
-        Relief.log.error(err.stack);
+      }, err => {
+        Relief.log.error(err.stack || err);
       });
     };
 
 
-    $scope.clearSearchResults = function() {
-      $scope.searchResults = [];
-    };
+    $scope.clearSearchResults = () => $scope.searchResults = [];
+
 
   };
 
