@@ -45,6 +45,7 @@
 
 
     $scope.isInstalled = app => {
+      if (!app || !app.manifest) { return false; }
       for (let installed of $scope.installedApps) {
         if (installed.name === app.manifest.name) {
           return true;
@@ -55,6 +56,7 @@
 
 
     $scope.isDefaultPlugin = app => {
+      if (!app || !app.manifest) { return false; }
       return Relief.env.defaultPlugins.indexOf(app.manifest.name) !== -1;
     };
 
