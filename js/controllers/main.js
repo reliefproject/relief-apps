@@ -19,7 +19,9 @@
       responsibilityTaken: false,
       error: '',
     };
-    $scope.selectedTab = 'details';
+    $scope.modal = {
+      selectedTab: 'details',
+    };
 
 
     Settings.loadSettings()
@@ -67,6 +69,7 @@
         manifest: app,
         settings: User.pluginMap.get(app),
       };
+      $scope.modal.selectedTab = 'details';
       angular.element('#modalDetailsInstalled').modal('show');
     };
 
@@ -100,7 +103,10 @@
     };
 
 
-    $scope.setAppToInstall = app => $scope.appToInstall = app;
+    $scope.setAppToInstall = app => {
+      $scope.modal.selectedTab = 'details';
+      $scope.appToInstall = app;
+    };
 
 
     $scope.installApp = () => {
@@ -134,10 +140,6 @@
 
     $scope.clearSearchResults = () => $scope.searchResults = [];
 
-
-    angular.element('#modalDetailsInstalled').on('shown', () => {
-      alert('test')
-    });
 
   };
 

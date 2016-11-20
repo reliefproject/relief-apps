@@ -13,23 +13,23 @@
       <div class="clearfix"></div>
 
       <ul class="nav nav-tabs nav-justified">
-        <li role="presentation" ng-class="{ active: selectedTab == 'login'}">
-          <a href="#" ng-click="selectedTab = 'details'">Details</a>
+        <li role="presentation" ng-class="{ active: modal.selectedTab == 'details'}">
+          <a href="#" ng-click="modal.selectedTab = 'details'">Details</a>
         </li>
-        <li role="presentation" ng-class="{ active: selectedTab == 'create'}">
-          <a href="#" ng-click="selectedTab = 'changelog'">Changelog</a>
+        <li role="presentation" ng-class="{ active: modal.selectedTab == 'changelog'}">
+          <a href="#" ng-click="modal.selectedTab = 'changelog'">Changelog</a>
         </li>
       </ul>
 
-      <table class="table table-condensed" ng-show="selectedTab === 'details'">
+      <table class="table table-condensed" ng-show="modal.selectedTab === 'details'">
         <tr>
           <td>Version</td><td>{{ appToEdit.manifest.version }}</td>
         </tr>
       </table>
 
-      <table class="table table-condensed" ng-show="selectedTab === 'changelog'">
+      <table class="table table-condensed" ng-show="modal.selectedTab === 'changelog'">
         <tr ng-repeat="(version, resource) in appToEdit.manifest.resources">
-          <td>{{ version }}</td><td>{{ resource.comment ? resource.comment : 'No comment provided' }}</td>
+          <td>{{ version }}</td><td>{{ resource.comment || 'No comment provided' }}</td>
         </tr>
       </table>
 
