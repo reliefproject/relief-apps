@@ -19,7 +19,7 @@
         </tr>
       </table>
       <div class="alert alert-warning" role="alert">Warning: Apps have access to your saved private keys.</div>
-      <div class="checkbox">
+      <div class="checkbox" ng-show="!isInstalled(appToInstall)">
         <label>
           <input type="checkbox" ng-model="appToInstall.responsibilityTaken"> I take responsibility for my own actions
         </label>
@@ -33,6 +33,7 @@
       </button>
       <button type="button" class="btn btn-positive"
               ng-disabled="!appToInstall.responsibilityTaken"
+              ng-show="!isInstalled(appToInstall)"
               ng-click="installApp()">
         Install
       </button>
