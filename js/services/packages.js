@@ -11,8 +11,7 @@
       getFeatured: () => {
         const featuredApps = ['test5', 'test6'];
         let promises = [];
-        for (let i in featuredApps) {
-          const app = featuredApps[i];
+        for (let app of featuredApps) {
           promises.push(
             Relief.plugin.info(app)
           );

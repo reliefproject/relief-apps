@@ -9,7 +9,7 @@
     $scope.forms = {
       search: '',
     };
-    $scope.installedApps = {};
+    $scope.installedApps = [];
     $scope.featuredApps = [];
     $scope.searchResults = [];
     $scope.appToEdit = {
@@ -40,6 +40,16 @@
 
     $scope.launchApp = plugin => {
       Relief.emit('webview.open', plugin);
+    };
+
+
+    $scope.isInstalled = app => {
+      for (let installed of $scope.installedApps) {
+        if (installed.name === app.manifest.name) {
+          return true;
+        }
+      }
+      return false;
     };
 
 
