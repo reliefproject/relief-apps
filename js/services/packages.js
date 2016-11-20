@@ -38,6 +38,7 @@
         })
         .then(result => {
           const packages = result.data.data;
+          let promises = [];
           let returnVal = {
             query: query,
             package: {},
@@ -50,7 +51,11 @@
             let manifest = transaction.isText
               ? transaction.data
               : Buffer.from(transaction.data, 'hex').toString();
-            manifest = JSON.parse(manifest);
+            try {
+              manifest = JSON.parse(manifest);
+            } catch (e) {
+              continue;
+            }
 
             if (transaction.transaction === aliasData) {
               returnVal.package = {
@@ -59,15 +64,43 @@
               };
               continue;
             }
-            returnVal.similarPackages.push({
-              transaction: transaction,
-              manifest: manifest,
-            });
+            if (transaction.name === query) {
+              continue;
+            }
+            promises.push(
+              service.lookupAlias(transaction.transaction, transaction.name)
+              .then(hasAlias => {
+                if (!hasAlias) {
+                  return;
+                }
+                returnVal.similarPackages.push({
+                  transaction: transaction,
+                  manifest: manifest,
+                });
+              })
+            );
           }
-          return returnVal;
+          return Promise.all(promises).then(() => {
+            return returnVal;
+          });
         });
       },
 
+
+      lookupAlias: (txid, aliasName) => {
+        return Relief.nxt.request('getAlias', { aliasName })
+        .then(result => {
+          return new Promise((resolve, reject) => {
+            if (!result.data || !result.data.aliasURI) {
+              return resolve(false);
+            }
+            if (result.data.aliasURI !== txid) {
+              return resolve(false);
+            }
+            resolve(true);
+          });
+        });
+      },
 
     };
 
