@@ -9,12 +9,32 @@
     <div class="modal-body">
       <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
       <p>{{ appToEdit.manifest.description }}</p>
-      <table class="table table-condensed">
+
+      <div class="clearfix"></div>
+
+      <ul class="nav nav-tabs nav-justified">
+        <li role="presentation" ng-class="{ active: selectedTab == 'login'}">
+          <a href="#" ng-click="selectedTab = 'details'">Details</a>
+        </li>
+        <li role="presentation" ng-class="{ active: selectedTab == 'create'}">
+          <a href="#" ng-click="selectedTab = 'changelog'">Changelog</a>
+        </li>
+      </ul>
+
+      <table class="table table-condensed" ng-show="selectedTab === 'details'">
         <tr>
           <td>Version</td><td>{{ appToEdit.manifest.version }}</td>
         </tr>
       </table>
-      <div class="checkbox">
+
+      <table class="table table-condensed" ng-show="selectedTab === 'changelog'">
+        <tr ng-repeat="(version, resource) in appToEdit.manifest.resources">
+          <td>{{ version }}</td><td>{{ resource.comment ? resource.comment : 'No comment provided' }}</td>
+        </tr>
+      </table>
+
+
+      <div class="checkbox" ng-hide="isDefaultPlugin(appToEdit)">
         <label>
           <input type="checkbox" ng-model="appToEdit.settings.showInMenu"> Show in "My Apps" menu
         </label>
@@ -28,7 +48,9 @@
       <button type="button" class="btn btn-default" ng-click="updateEditedApp()">
         Save
       </button>
-      <button type="button" class="btn btn-negative" ng-click="uninstallApp()">
+      <button type="button" class="btn btn-negative"
+              ng-click="uninstallApp()"
+              ng-hide="isDefaultPlugin(appToEdit)">
         Uninstall
       </button>
     </div>

@@ -19,6 +19,7 @@
       responsibilityTaken: false,
       error: '',
     };
+    $scope.selectedTab = 'details';
 
 
     Settings.loadSettings()
@@ -50,6 +51,11 @@
         }
       }
       return false;
+    };
+
+
+    $scope.isDefaultPlugin = app => {
+      return Relief.env.defaultPlugins.indexOf(app.manifest.name) !== -1;
     };
 
 
@@ -126,6 +132,10 @@
 
     $scope.clearSearchResults = () => $scope.searchResults = [];
 
+
+    angular.element('#modalDetailsInstalled').on('shown', () => {
+      alert('test')
+    });
 
   };
 
