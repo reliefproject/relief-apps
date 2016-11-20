@@ -77,7 +77,7 @@
                   transaction: transaction,
                   manifest: manifest,
                 });
-              })
+              });
             );
           }
           return Promise.all(promises).then(() => {
