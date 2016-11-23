@@ -31,11 +31,11 @@
 
       addPlugin: plugin => {
         let plugins = service.getPlugins();
-        plugins[plugin.manifest.name] = {
+        plugins[plugin.transaction.name] = {
           enabled: true,
           showInMenu: true,
         };
-        service.pluginMap.set(plugin.manifest, plugins[plugin.manifest.name]);
+        service.pluginMap.set(plugin.manifest, plugins[plugin.transaction.name]);
         return Relief.db.user.update({
           plugins: plugins,
         });
