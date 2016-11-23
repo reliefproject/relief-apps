@@ -110,7 +110,7 @@
 
 
     $scope.installApp = () => {
-      Relief.plugin.install($scope.appToInstall.manifest.name)
+      Relief.plugin.install($scope.appToInstall.transaction.name)
       .then(() => {
         return User.addPlugin($scope.appToInstall);
       })
