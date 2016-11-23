@@ -111,9 +111,7 @@
 
     $scope.installApp = () => {
       Relief.plugin.install($scope.appToInstall.transaction.name)
-      .then(() => {
-        return User.addPlugin($scope.appToInstall);
-      })
+      .then(User.addPlugin($scope.appToInstall))
       .then(() => {
         $scope.installedApps = [...User.pluginMap.keys()];
         $scope.$apply();
@@ -121,7 +119,7 @@
         Relief.emit('updateAppMenu');
       }, err => {
         Relief.log.error(err.stack || err);
-        $scope.appToInstall.error = err.message;
+        $scope.appToInstall.error = err.message || err;
         $scope.$apply();
       });
     };
