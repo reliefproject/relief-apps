@@ -15,7 +15,7 @@
                 ng-click="setAppToEdit($event, app)">
           <span class="icon icon-cog"></span>
         </button>
-        <strong>{{ app.name }}</strong> {{ app.version }}  <span ng-show="isDeprecated(app)" class="badge pull-right">Deprecated</span>
+        <strong>{{ app.name }}</strong> {{ app.version }}  <span ng-show="isDeprecated({ manifest: app })" class="badge pull-right">Deprecated</span>
         <p>{{ app.description }}</p>
       </div>
     </li>

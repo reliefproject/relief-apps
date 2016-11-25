@@ -6,5 +6,6 @@
   "description":"Relief Plugins",
   "version":"0.0.0",
   "icon":"icon-home",
-  "main":"apps.html"
+  "main":"apps.html",
+  "relief":"0.0.0"
 }

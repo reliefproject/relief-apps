@@ -58,6 +58,7 @@
 
 
     $scope.isDeprecated = app => {
+      if (!app || !app.manifest) { return; }
       if (!app.manifest.relief ||
           !Relief.lib.semver.valid(app.manifest.relief) ||
           Relief.lib.semver.lt(app.manifest.relief, Relief.env.version)
