@@ -55,7 +55,6 @@
             } catch (e) {
               continue;
             }
-
             if (transaction.transaction === aliasData) {
               returnVal.package = {
                 transaction: transaction,

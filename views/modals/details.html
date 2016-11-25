@@ -32,7 +32,8 @@
 
       <table class="table table-condensed" ng-show="modal.selectedTab === 'changelog'">
         <tr ng-repeat="(version, resource) in appToInstall.manifest.resources">
-          <td>{{ version }}</td><td>{{ resource.comment || 'No comment provided' }}</td>
+          <td>{{ version }}</td>
+          <td>{{ resource.comment || 'No comment provided' }}</td>
         </tr>
       </table>
 

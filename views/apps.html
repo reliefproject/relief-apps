@@ -15,7 +15,7 @@
                 ng-click="setAppToEdit($event, app)">
           <span class="icon icon-cog"></span>
         </button>
-        <strong>{{ app.name }}</strong> {{ app.version }}
+        <strong>{{ app.name }}</strong> {{ app.version }}  <span ng-show="isDeprecated(app)" class="badge pull-right">Deprecated</span>
         <p>{{ app.description }}</p>
       </div>
     </li>
@@ -49,7 +49,7 @@
         ng-click="setAppToInstall(searchResults.package)">
       <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
       <div>
-        <strong>{{ searchResults.package.transaction.name }}</strong> {{ searchResults.package.manifest.version }} <span ng-show="isInstalled(searchResults.package)" class="badge pull-right">Installed</span>
+        <strong>{{ searchResults.package.transaction.name }}</strong> {{ searchResults.package.manifest.version }} <span ng-show="isInstalled(searchResults.package)" class="badge pull-right">Installed</span> <span ng-show="isDeprecated(searchResults.package)" class="badge pull-right">Deprecated</span>
         <p>{{ searchResults.package.transaction.description }}</p>
       </div>
     </li>
@@ -66,7 +66,7 @@
         ng-click="setAppToInstall(app)">
       <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
       <div>
-        <strong>{{ app.transaction.name }}</strong> {{ app.manifest.version }} <span ng-show="isInstalled(app)" class="badge pull-right">Installed</span>
+        <strong>{{ app.transaction.name }}</strong> {{ app.manifest.version }} <span ng-show="isInstalled(app)" class="badge pull-right">Installed</span> <span ng-show="isDeprecated(app)" class="badge pull-right">Deprecated</span>
         <p>{{ app.transaction.description }}</p>
       </div>
     </li>
@@ -80,7 +80,7 @@
           ng-click="setAppToInstall(app)">
         <img class="img-circle media-object pull-left" src="http://photonkit.com/assets/img/avatar2.png" width="32" height="32">
         <div>
-          <strong>{{ app.transaction.name }}</strong> {{ app.manifest.version }} <span ng-show="isInstalled(app)" class="badge pull-right">Installed</span>
+          <strong>{{ app.transaction.name }}</strong> {{ app.manifest.version }} <span ng-show="isInstalled(app)" class="badge pull-right">Installed</span> <span ng-show="isDeprecated(app)" class="badge pull-right">Deprecated</span>
           <p>{{ app.transaction.description }}</p>
         </div>
       </li>

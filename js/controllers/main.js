@@ -47,11 +47,22 @@
 
 
     $scope.isInstalled = app => {
-      if (!app || !app.manifest) { return false; }
+      if (!app || !app.transaction) { return false; }
       for (let installed of $scope.installedApps) {
-        if (installed.name === app.manifest.name) {
+        if (installed.name === app.transaction.name) {
           return true;
         }
+      }
+      return false;
+    };
+
+
+    $scope.isDeprecated = app => {
+      if (!app.manifest.relief ||
+          !Relief.lib.semver.valid(app.manifest.relief) ||
+          Relief.lib.semver.lt(app.manifest.relief, Relief.env.version)
+      ) {
+        return true;
       }
       return false;
     };
